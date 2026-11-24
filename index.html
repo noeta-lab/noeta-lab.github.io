@@ -3,12 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- TITLE: Simplificado exclusivamente a "Noetá" -->
 <title>Noetá</title>
 <meta name="description" content="Noetá es una consultoría mexicana de estrategia, alianzas y operaciones. Reportes sectoriales por suscripción para PyMEs y acompañamiento para empresas de todos los tamaños.">
 <meta name="author" content="Noetá">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <meta name="theme-color" content="#ffffff">
+<!-- SEO: Geolocalización e idiomas alternativos (hreflang) -->
+<meta name="geo.region" content="MX">
+<meta name="geo.placename" content="Ciudad de México, México">
 <link rel="canonical" href="https://noeta-lab.github.io/">
+<link rel="alternate" hreflang="es-MX" href="https://noeta-lab.github.io/">
+<link rel="alternate" hreflang="en" href="https://noeta-lab.github.io/">
+<link rel="alternate" hreflang="x-default" href="https://noeta-lab.github.io/">
 
 <!-- Íconos -->
 <link rel="icon" type="image/png" href="logo.png">
@@ -24,6 +31,8 @@
 <meta property="og:image:alt" content="Logo de Noetá">
 <meta property="og:locale" content="es_MX">
 <meta property="og:locale:alternate" content="en_US">
+<!-- SEO: Fecha de última modificación Open Graph -->
+<meta property="article:modified_time" content="2026-11-23T00:00:00-06:00">
 
 <!-- Twitter / X -->
 <meta name="twitter:card" content="summary">
@@ -31,7 +40,7 @@
 <meta name="twitter:description" content="Consultoría mexicana de estrategia, alianzas y operaciones para empresas de todos los tamaños.">
 <meta name="twitter:image" content="https://noeta-lab.github.io/logo.png">
 
-<!-- Datos estructurados para Google -->
+<!-- SEO: Datos estructurados enriquecidos para Google (Schema.org) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -59,7 +68,23 @@
       "email": "hola@noeta.mx",
       "description": "Consultoría mexicana de estrategia, alianzas y operaciones para empresas de todos los tamaños, con reportes sectoriales por suscripción para PyMEs.",
       "slogan": "Estrategia de alto nivel, al alcance de tu empresa",
-      "areaServed": { "@type": "Country", "name": "México" },
+      "priceRange": "$$",
+      "serviceType": [
+        "Consultoría estratégica",
+        "Alianzas estratégicas",
+        "Consultoría de operaciones",
+        "Inteligencia sectorial para PyMEs"
+      ],
+      "areaServed": {
+        "@type": "Country",
+        "name": "México",
+        "sameAs": "https://www.wikidata.org/wiki/Q96"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "MX",
+        "addressRegion": "CDMX"
+      },
       "knowsAbout": [
         "Estrategia empresarial",
         "Alianzas estratégicas",
@@ -69,13 +94,22 @@
         "Consultoría para PyMEs"
       ],
       "founder": [
-        { "@type": "Person", "name": "Rodrigo Hernández Cervantes" },
-        { "@type": "Person", "name": "Miguel Ángel Hernández Ruíz" }
+        {
+          "@type": "Person",
+          "name": "Rodrigo Hernández Cervantes",
+          "url": "https://rodrigo-h-c.github.io/index.html"
+        },
+        {
+          "@type": "Person",
+          "name": "Miguel Ángel Hernández Ruíz",
+          "url": "https://postsocratico.com/"
+        }
       ],
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer service",
         "email": "hola@noeta.mx",
+        "areaServed": "MX",
         "availableLanguage": ["Spanish", "English"]
       },
       "hasOfferCatalog": {
@@ -86,24 +120,36 @@
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
+              "@id": "https://noeta-lab.github.io/#service-coyuntura",
               "name": "Inteligencia de coyuntura",
-              "description": "Análisis del entorno económico y de datos de mercado en lenguaje claro y accionable."
+              "serviceType": "Análisis económico y de mercado",
+              "description": "Análisis del entorno económico y de datos de mercado en lenguaje claro y accionable.",
+              "provider": { "@id": "https://noeta-lab.github.io/#organization" },
+              "areaServed": { "@type": "Country", "name": "México" }
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
+              "@id": "https://noeta-lab.github.io/#service-estrategia",
               "name": "Estrategia, alianzas y operaciones",
-              "description": "Planes de crecimiento, alianzas que abren mercados y operaciones ordenadas para ejecutar."
+              "serviceType": "Consultoría de crecimiento, alianzas y ejecución operativa",
+              "description": "Planes de crecimiento, alianzas que abren mercados y operaciones ordenadas para ejecutar.",
+              "provider": { "@id": "https://noeta-lab.github.io/#organization" },
+              "areaServed": { "@type": "Country", "name": "México" }
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
+              "@id": "https://noeta-lab.github.io/#service-reporte-pyme",
               "name": "Plan PyME: reporte sectorial mensual",
-              "description": "Suscripción mensual de inteligencia de negocio a la medida del sector de cada PyME."
+              "serviceType": "Suscripción mensual de inteligencia sectorial",
+              "description": "Suscripción mensual de inteligencia de negocio a la medida del sector de cada PyME.",
+              "provider": { "@id": "https://noeta-lab.github.io/#organization" },
+              "areaServed": { "@type": "Country", "name": "México" }
             }
           }
         ]
@@ -114,6 +160,7 @@
       "@id": "https://noeta-lab.github.io/#webpage",
       "url": "https://noeta-lab.github.io/",
       "name": "Noetá | Estrategia, alianzas y operaciones",
+      "dateModified": "2026-11-23",
       "isPartOf": { "@id": "https://noeta-lab.github.io/#website" },
       "about": { "@id": "https://noeta-lab.github.io/#organization" },
       "inLanguage": "es-MX"
@@ -127,7 +174,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
 <style>
 /* ==========================================================================
-   1. DESIGN TOKENS — ABLETON.COM PROMOTIONAL EDITORIAL PALETTE
+1. DESIGN TOKENS — ABLETON.COM PROMOTIONAL EDITORIAL PALETTE
       Flat matte surfaces, zero shadows, zero gradients, zero blur.
    ========================================================================== */
 :root {
@@ -230,7 +277,7 @@
 }
 
 /* ==========================================================================
-   2. RESET, BASE TYPOGRAPHY & CANVAS LAYERING
+2. RESET, BASE TYPOGRAPHY & CANVAS LAYERING
    ========================================================================== */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -327,7 +374,7 @@ h1, h2, h3 {
 }
 
 /* ==========================================================================
-   3. BUTTONS — CRISP FLAT EDITORIAL CONTROLS (2px RADIUS, NO SHADOWS)
+3. BUTTONS — CRISP FLAT EDITORIAL CONTROLS (2px RADIUS, NO SHADOWS)
    ========================================================================== */
 .btn {
   display: inline-flex;
@@ -382,7 +429,7 @@ h1, h2, h3 {
 }
 
 /* ==========================================================================
-   4. HEADER — CLEAN 72px ABLETON.COM EDITORIAL BAR
+4. HEADER — CLEAN 72px ABLETON.COM EDITORIAL BAR
    ========================================================================== */
 header {
   position: sticky;
@@ -587,7 +634,7 @@ header {
 }
 
 /* ==========================================================================
-   5. HERO SECTION (#inicio) — ABLETON 12/13 PROMOTIONAL SPLIT
+5. HERO SECTION (#inicio) — ABLETON 12/13 PROMOTIONAL SPLIT
    ========================================================================== */
 .hero {
   padding: clamp(3.5rem, 8vw, 6.75rem) 0 clamp(4rem, 9vw, 7.5rem);
@@ -714,7 +761,7 @@ header {
 }
 
 /* ==========================================================================
-   6. SERVICES SECTION (#servicios) — SPACIOUS 2-COLUMN SWISS EDITORIAL
+6. SERVICES SECTION (#servicios) — SPACIOUS 2-COLUMN SWISS EDITORIAL
    ========================================================================== */
 .services {
   padding: clamp(4.5rem, 9vw, 8rem) 0;
@@ -831,7 +878,7 @@ header {
 }
 
 /* ==========================================================================
-   7. NUESTRO REPORTE SECTORIAL (#reporte) — OVERLAPPING COLOR-BLOCK SPREAD
+7. NUESTRO REPORTE SECTORIAL (#reporte) — OVERLAPPING COLOR-BLOCK SPREAD
    ========================================================================== */
 .report {
   padding: clamp(4rem, 8.5vw, 7.5rem) 0;
@@ -863,7 +910,70 @@ header {
   margin-right: clamp(0rem, 2.5vw, 2.25rem);
 }
 
+/* MAP: Mapa vectorial de México con divisiones políticas (32 entidades) y acento CDMX */
+.report-map-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  color: var(--report-ink);
+}
+
+.report-map-bg svg {
+  position: absolute;
+  right: clamp(0.75rem, 3.5vw, 3rem);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(82%, 47rem);
+  height: auto;
+  max-height: 94%;
+  opacity: 0.14;
+}
+
+.report-map-bg .mx-states path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.report-map-bg .mx-cdmx-fill {
+  fill: var(--cobalt);
+  stroke: var(--cobalt);
+  stroke-width: 1.4;
+}
+
+.report-map-bg .mx-hub {
+  fill: var(--cobalt);
+}
+
+.report-map-bg .mx-hub-ring {
+  fill: none;
+  stroke: var(--cobalt);
+  stroke-width: 1.2;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mx-pulse 4.5s ease-out infinite;
+}
+
+@keyframes mx-pulse {
+  0%   { transform: scale(1);   opacity: 0.95; }
+  75%  { transform: scale(2.8); opacity: 0; }
+  100% { transform: scale(2.8); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .report-map-bg .mx-hub-ring {
+    animation: none;
+    opacity: 0.55;
+  }
+}
+
 .report-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1fr;
   gap: clamp(2.5rem, 5vw, 4rem);
@@ -1031,7 +1141,7 @@ header {
 }
 
 /* ==========================================================================
-   8. WHY NOETÁ SECTION (#porque) — FLOATING LAVENDER EDITORIAL BACKDROP
+8. WHY NOETÁ SECTION (#porque) — FLOATING LAVENDER EDITORIAL BACKDROP
    ========================================================================== */
 .why {
   padding: clamp(4.5rem, 9vw, 8rem) 0;
@@ -1118,7 +1228,7 @@ header {
 }
 
 /* ==========================================================================
-   9. CONTACT & FOUNDING TEAM (#contacto) — OPEN ARCHITECTURAL SPLIT
+9. CONTACT & FOUNDING TEAM (#contacto) — OPEN ARCHITECTURAL SPLIT
    ========================================================================== */
 .contact {
   padding: clamp(4.5rem, 9vw, 8rem) 0 clamp(5rem, 9.5vw, 8.5rem);
@@ -1184,6 +1294,7 @@ header {
 .founders {
   padding-top: 2.25rem;
   border-top: 1px solid var(--line);
+  font-style: normal;
 }
 
 .founders-title {
@@ -1203,6 +1314,34 @@ header {
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.25;
+}
+
+.founder-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.14s ease;
+}
+
+.founder-link:hover {
+  color: var(--cobalt);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+}
+
+.founder-arrow {
+  font-size: 0.85em;
+  font-weight: 500;
+  opacity: 0.6;
+  transition: opacity 0.14s ease, transform 0.14s ease;
+}
+
+.founder-link:hover .founder-arrow {
+  opacity: 1;
+  transform: translate(2px, -2px);
 }
 
 /* Minimal, Uncluttered Editorial Form */
@@ -1260,7 +1399,7 @@ header {
 }
 
 /* ==========================================================================
-   10. FOOTER — MINIMAL ABLETON.COM EDITORIAL BAR
+10. FOOTER — MINIMAL ABLETON.COM EDITORIAL BAR
    ========================================================================== */
 footer {
   border-top: 1px solid var(--line);
@@ -1353,14 +1492,15 @@ footer {
   <!-- ======================================================================
        HERO SECTION (#inicio) — ABLETON 12/13 PROMOTIONAL SPLIT
        ====================================================================== -->
-  <section class="hero" id="inicio" aria-label="Inicio">
+  <!-- SEO: aria-labelledby enlazado al <h1> principal -->
+  <section class="hero" id="inicio" aria-labelledby="hero-heading">
     <div class="wrap">
       <div class="hero-grid">
         <!-- Left Column (~56%): Swiss Editorial Typography -->
         <div class="hero-copy">
           <span class="eyebrow" data-i18n="hero_eyebrow">CONSULTORÍA · MÉXICO</span>
           <div class="hero-rule" aria-hidden="true"></div>
-          <h1 data-i18n="h1">Estrategia de alto nivel, al alcance de tu empresa</h1>
+          <h1 id="hero-heading" data-i18n="h1">Estrategia de alto nivel, al alcance de tu empresa</h1>
           <div class="hero-badge" data-i18n="hero_badge">ESTRATEGIA · ALIANZAS · OPERACIONES</div>
           <p class="hero-sub" data-i18n="sub">Consultoría especializada en strategy, alianzas y operaciones para empresas que quieren crecer, sin importar su tamaño.</p>
           <div class="hero-actions">
@@ -1394,18 +1534,19 @@ footer {
   <!-- ======================================================================
        SERVICES SECTION (#servicios) — SPACIOUS 2-COLUMN SWISS EDITORIAL
        ====================================================================== -->
-  <section class="services" id="servicios">
+  <!-- SEO: aria-labelledby enlazado al heading de sección y artículos con aria-labelledby -->
+  <section class="services" id="servicios" aria-labelledby="services-heading">
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow" data-i18n="s_eyebrow">QUÉ HACEMOS</span>
-        <h2 data-i18n="s_h">Entender el entorno y convertirlo en resultados</h2>
+        <h2 id="services-heading" data-i18n="s_h">Entender el entorno y convertirlo en resultados</h2>
       </div>
 
       <div class="pillars">
         <!-- Pillar 01 -->
-        <article class="pillar pillar--1">
+        <article class="pillar pillar--1" aria-labelledby="pillar1-heading">
           <span class="pillar-num" aria-hidden="true">01</span>
-          <h3 data-i18n="s1_h">Inteligencia de coyuntura para decidir mejor</h3>
+          <h3 id="pillar1-heading" data-i18n="s1_h">Inteligencia de coyuntura para decidir mejor</h3>
           <p class="pillar-desc" data-i18n="s1_p">Te ayudamos a entender el entorno económico y los datos del mercado en un lenguaje claro y accionable, para que cada decisión tenga fundamento.</p>
           <ul class="pillar-list">
             <li data-i18n="s1_a">Qué está pasando en tu sector y por qué te importa</li>
@@ -1415,9 +1556,9 @@ footer {
         </article>
 
         <!-- Pillar 02 -->
-        <article class="pillar pillar--2">
+        <article class="pillar pillar--2" aria-labelledby="pillar2-heading">
           <span class="pillar-num" aria-hidden="true">02</span>
-          <h3 data-i18n="s2_h">Estrategia y operación que aterrizan resultados</h3>
+          <h3 id="pillar2-heading" data-i18n="s2_h">Estrategia y operación que aterrizan resultados</h3>
           <p class="pillar-desc" data-i18n="s2_p">Traducimos las necesidades y ambiciones de cada cliente en resultados reales y medibles.</p>
           <ul class="pillar-list">
             <li data-i18n="s2_a">Un plan de crecimiento a la medida de tu empresa</li>
@@ -1432,17 +1573,94 @@ footer {
   <!-- ======================================================================
        NUESTRO REPORTE SECTORIAL (#reporte) — OVERLAPPING COLOR-BLOCK SPREAD
        ====================================================================== -->
-  <section class="report" id="reporte">
+  <!-- SEO: aria-labelledby enlazado al heading de reporte -->
+  <section class="report" id="reporte" aria-labelledby="report-heading">
     <div class="wrap">
       <div class="report-spread">
         <div class="report-volt-accent" aria-hidden="true"></div>
 
         <div class="report-plane">
+          <!-- MAP: Mapa de México con divisiones políticas estatales (32 entidades) y acento en CDMX -->
+          <div class="report-map-bg" aria-hidden="true">
+            <svg viewBox="0 0 800 550" preserveAspectRatio="xMidYMid meet">
+              <g class="mx-states">
+                <!-- Baja California -->
+                <path d="M 30,28 L 76,32 L 94,104 L 68,104 L 46,66 Z"/>
+                <!-- Baja California Sur -->
+                <path d="M 68,104 L 94,104 L 128,176 L 116,188 L 96,154 Z"/>
+                <!-- Sonora -->
+                <path d="M 76,32 L 178,44 L 172,138 L 138,144 L 94,104 Z"/>
+                <!-- Chihuahua -->
+                <path d="M 178,44 L 274,64 L 270,164 L 194,164 L 172,138 Z"/>
+                <!-- Coahuila -->
+                <path d="M 274,64 L 348,82 L 352,184 L 288,184 L 270,164 Z"/>
+                <!-- Nuevo León -->
+                <path d="M 348,82 L 382,118 L 384,218 L 354,224 L 352,184 Z"/>
+                <!-- Tamaulipas -->
+                <path d="M 382,118 L 414,132 L 418,246 L 384,244 L 384,218 Z"/>
+                <!-- Sinaloa -->
+                <path d="M 138,144 L 172,138 L 194,164 L 216,228 L 192,236 Z"/>
+                <!-- Durango -->
+                <path d="M 194,164 L 270,164 L 288,184 L 274,246 L 216,228 Z"/>
+                <!-- Zacatecas -->
+                <path d="M 288,184 L 332,184 L 338,256 L 296,268 L 274,246 Z"/>
+                <!-- San Luis Potosí -->
+                <path d="M 332,184 L 354,224 L 384,244 L 378,284 L 338,274 L 338,256 Z"/>
+                <!-- Nayarit -->
+                <path d="M 192,236 L 216,228 L 246,254 L 238,284 L 216,282 Z"/>
+                <!-- Aguascalientes -->
+                <path d="M 294,254 L 312,254 L 312,272 L 294,272 Z"/>
+                <!-- Jalisco -->
+                <path d="M 216,282 L 238,284 L 246,254 L 294,254 L 294,272 L 306,294 L 274,322 L 232,318 Z"/>
+                <!-- Guanajuato -->
+                <path d="M 306,272 L 344,274 L 346,306 L 310,308 Z"/>
+                <!-- Querétaro -->
+                <path d="M 344,274 L 374,282 L 370,312 L 346,306 Z"/>
+                <!-- Hidalgo -->
+                <path d="M 374,282 L 408,292 L 404,326 L 370,322 L 370,312 Z"/>
+                <!-- Colima -->
+                <path d="M 244,318 L 266,320 L 262,334 L 246,332 Z"/>
+                <!-- Michoacán -->
+                <path d="M 266,320 L 306,294 L 310,308 L 344,312 L 340,356 L 282,354 Z"/>
+                <!-- Estado de México -->
+                <path d="M 344,312 L 370,322 L 392,334 L 384,362 L 342,356 Z"/>
+                <!-- Ciudad de México (CDMX) -->
+                <path class="mx-cdmx-fill" d="M 366,338 L 378,338 L 378,350 L 366,350 Z"/>
+                <!-- Morelos -->
+                <path d="M 362,352 L 384,352 L 384,368 L 362,368 Z"/>
+                <!-- Tlaxcala -->
+                <path d="M 392,332 L 412,332 L 412,346 L 392,346 Z"/>
+                <!-- Puebla -->
+                <path d="M 384,326 L 404,326 L 434,344 L 426,384 L 384,368 L 392,346 L 412,346 L 412,332 L 392,332 Z"/>
+                <!-- Guerrero -->
+                <path d="M 282,354 L 342,356 L 362,368 L 384,368 L 388,402 L 318,386 Z"/>
+                <!-- Veracruz -->
+                <path d="M 414,246 L 434,296 L 474,354 L 516,374 L 502,394 L 456,384 L 426,384 L 434,344 L 404,326 L 408,292 L 384,284 L 384,244 Z"/>
+                <!-- Oaxaca -->
+                <path d="M 384,368 L 426,384 L 456,384 L 484,412 L 444,432 L 388,402 Z"/>
+                <!-- Tabasco -->
+                <path d="M 502,394 L 516,374 L 574,376 L 568,402 L 518,402 Z"/>
+                <!-- Chiapas -->
+                <path d="M 484,412 L 518,402 L 568,402 L 582,444 L 538,464 L 496,434 Z"/>
+                <!-- Campeche -->
+                <path d="M 574,376 L 626,312 L 648,318 L 644,398 L 568,402 Z"/>
+                <!-- Yucatán -->
+                <path d="M 626,312 L 716,304 L 712,344 L 648,348 Z"/>
+                <!-- Quintana Roo -->
+                <path d="M 716,304 L 732,312 L 704,398 L 644,398 L 648,348 L 712,344 Z"/>
+              </g>
+
+              <!-- Punto de acento en Ciudad de México (cobalto en claro, volt en oscuro) -->
+              <circle class="mx-hub-ring" cx="372" cy="344" r="6"/>
+              <circle class="mx-hub" cx="372" cy="344" r="4"/>
+            </svg>
+          </div>
+
           <div class="report-grid">
             <!-- Left Editorial Content -->
             <div class="report-editorial">
               <span class="eyebrow" data-i18n="rep_eyebrow">SUSCRIPCIÓN MENSUAL · INTELIGENCIA PARA PYMES</span>
-              <h2 data-i18n="rep_h">Nuestro reporte sectorial</h2>
+              <h2 id="report-heading" data-i18n="rep_h">Nuestro reporte sectorial</h2>
               <div class="report-rule" aria-hidden="true"></div>
               <p class="report-lead" data-i18n="rep_lead">Una suscripción mensual accesible para PyMEs que entrega reportes de inteligencia de negocio hechos a la medida de tu sector. Pensada para acercar análisis riguroso de mercado a tu dirección, sin necesidad de contar con un equipo interno de investigación.</p>
 
@@ -1497,14 +1715,15 @@ footer {
   <!-- ======================================================================
        WHY NOETÁ SECTION (#porque) — FLOATING LAVENDER EDITORIAL BACKDROP
        ====================================================================== -->
-  <section class="why" id="porque">
+  <!-- SEO: aria-labelledby enlazado al heading de sección -->
+  <section class="why" id="porque" aria-labelledby="why-heading">
     <div class="wrap">
       <div class="why-stage">
         <div class="why-lavender-plane">
           <div class="why-top">
             <div>
               <span class="eyebrow" data-i18n="w_eyebrow">POR QUÉ NOETÁ</span>
-              <h2 data-i18n="w_h">La consultoría especializada no debería ser un privilegio de unos pocos</h2>
+              <h2 id="why-heading" data-i18n="w_h">La consultoría especializada no debería ser un privilegio de unos pocos</h2>
             </div>
             <p class="why-lead" data-i18n="w_p">Noetá existe para que cualquier empresa mexicana, de la más pequeña a la más grande, tenga acceso a pensamiento estratégico de calidad y pueda aprovechar las oportunidades reales de los mercados.</p>
           </div>
@@ -1531,13 +1750,14 @@ footer {
   <!-- ======================================================================
        CONTACT & FOUNDING TEAM (#contacto) — OPEN ARCHITECTURAL SPLIT
        ====================================================================== -->
-  <section class="contact" id="contacto">
+  <!-- SEO: aria-labelledby y bloque semántico <address> con enlaces a los sitios de los fundadores -->
+  <section class="contact" id="contacto" aria-labelledby="contact-heading">
     <div class="wrap">
       <div class="contact-grid">
         <!-- Left Column: Intro, Direct Email & Founding Team -->
         <div class="contact-info">
           <span class="eyebrow" data-i18n="c_eyebrow">CONTACTO</span>
-          <h2 data-i18n="c_h">Conversemos sobre tu empresa</h2>
+          <h2 id="contact-heading" data-i18n="c_h">Conversemos sobre tu empresa</h2>
           <p class="contact-lead" data-i18n="c_p">Cuéntanos en pocas líneas qué quieres lograr. Te respondemos para platicar sin compromiso.</p>
 
           <div class="direct-row">
@@ -1545,17 +1765,27 @@ footer {
             <a class="direct-link" href="mailto:hola@noeta.mx">hola@noeta.mx ↗</a>
           </div>
 
-          <div class="founders">
+          <address class="founders">
             <h3 class="founders-title" data-i18n="t_h">Equipo fundador</h3>
             <div class="founders-names">
-              <span>Rodrigo Hernández Cervantes</span>
-              <span>Miguel Ángel Hernández Ruíz</span>
+              <span itemscope itemtype="https://schema.org/Person">
+                <a class="founder-link" href="https://rodrigo-h-c.github.io/index.html" target="_blank" rel="noopener noreferrer" itemprop="url">
+                  <span itemprop="name">Rodrigo Hernández Cervantes</span>
+                  <span class="founder-arrow" aria-hidden="true">↗</span>
+                </a>
+              </span>
+              <span itemscope itemtype="https://schema.org/Person">
+                <a class="founder-link" href="https://postsocratico.com/" target="_blank" rel="noopener noreferrer" itemprop="url">
+                  <span itemprop="name">Miguel Ángel Hernández Ruíz</span>
+                  <span class="founder-arrow" aria-hidden="true">↗</span>
+                </a>
+              </span>
             </div>
-          </div>
+          </address>
         </div>
 
-        <!-- Right Column: Uncluttered Editorial Contact Form -->
-        <form class="contact-form" id="f">
+        <!-- Right Column: Uncluttered Editorial Form -->
+        <form class="contact-form" id="f" aria-labelledby="contact-heading">
           <label class="field">
             <span data-i18n="c_n">Nombre</span>
             <input name="n" type="text" required autocomplete="name">
@@ -1566,9 +1796,9 @@ footer {
           </label>
           <label class="field">
             <span data-i18n="c_m">¿Qué te gustaría resolver?</span>
-            <textarea name="m" id="msg-field"></textarea>
+            <textarea name="m" id="msg-field" required></textarea>
           </label>
-          <button class="btn btn--primary" type="submit" data-i18n="c_b">Enviar mensaje</button>
+          <button class="btn btn--primary" type="submit" id="submit-btn" data-i18n="c_b">Enviar mensaje</button>
         </form>
       </div>
     </div>
@@ -1587,7 +1817,8 @@ footer {
         <span style="height: 11px;"></span>
         <span style="height: 15px;"></span>
       </span>
-      <span>© 2026 Noetá. <span data-i18n="rights">Todos los derechos reservados.</span></span>
+      <!-- SEO: Uso semántico de <time> para el año -->
+      <span>© <time datetime="2026">2026</time> Noetá. <span data-i18n="rights">Todos los derechos reservados.</span></span>
     </div>
     <a class="footer-top-link" href="#inicio" data-i18n="back_top">Volver arriba ↑</a>
   </div>
@@ -1595,7 +1826,7 @@ footer {
 
 <script>
 /* ==========================================================================
-   1. COMPLETE BILINGUAL DICTIONARY (ES / EN)
+1. COMPLETE BILINGUAL DICTIONARY (ES / EN)
    ========================================================================== */
 const T = {
   es: {
@@ -1670,6 +1901,9 @@ const T = {
     c_e: "Correo electrónico",
     c_m: "¿Qué te gustaría resolver?",
     c_b: "Enviar mensaje",
+    c_sending: "Enviando...",
+    c_sent: "Mensaje enviado ✓",
+    c_err: "Abriendo correo...",
     rights: "Todos los derechos reservados.",
     back_top: "Volver arriba ↑",
     subj: "Contacto desde el sitio de Noetá"
@@ -1746,6 +1980,9 @@ const T = {
     c_e: "Email",
     c_m: "What would you like to solve?",
     c_b: "Send message",
+    c_sending: "Sending...",
+    c_sent: "Message sent ✓",
+    c_err: "Opening email...",
     rights: "All rights reserved.",
     back_top: "Back to top ↑",
     subj: "Contact from the Noetá website"
@@ -1753,7 +1990,7 @@ const T = {
 };
 
 /* ==========================================================================
-   2. LANGUAGE, THEME, MOBILE MENU, CTA PRE-FILL & SCROLL-SPY
+2. LANGUAGE, THEME, MOBILE MENU, CTA PRE-FILL & SCROLL-SPY
    ========================================================================== */
 let lang = "es";
 let theme = "light"; // Default Light Theme (classic Ableton.com crisp white canvas)
@@ -1804,9 +2041,8 @@ function applyLang(nextLang) {
     btn.setAttribute("aria-pressed", String(btn.dataset.lang === lang));
   });
 
-  document.title = lang === "es"
-    ? "Noetá | Estrategia, alianzas y operaciones"
-    : "Noetá | Strategy, alliances and operations";
+  // TITLE: Mantener document.title siempre como "Noetá" tanto en ES como en EN
+  document.title = "Noetá";
 
   if (menuToggle && mobileMenu && mobileMenu.classList.contains("open")) {
     menuToggle.textContent = dict.menu_close;
@@ -1857,14 +2093,54 @@ if (repCta && msgField) {
   });
 }
 
-/* Form Submit -> Exact mailto:hola@noeta.mx Behavior with Localized Subject */
+// FORM: Envío directo vía FormSubmit AJAX (https://formsubmit.co/ajax/noeta.hs.cmr@gmail.com)
+// con fallback automático a mailto:noeta.hs.cmr@gmail.com si hay error de red o modo offline.
 const contactForm = document.getElementById("f");
-if (contactForm) {
-  contactForm.addEventListener("submit", ev => {
+const submitBtn = document.getElementById("submit-btn");
+if (contactForm && submitBtn) {
+  contactForm.addEventListener("submit", async ev => {
     ev.preventDefault();
-    const f = ev.target;
-    const body = encodeURIComponent(f.m.value + "\n\n" + f.n.value + " <" + f.e.value + ">");
-    location.href = "mailto:hola@noeta.mx?subject=" + encodeURIComponent(T[lang].subj) + "&body=" + body;
+    if (!contactForm.reportValidity()) return;
+
+    const dict = T[lang];
+    const nameVal = contactForm.n.value.trim();
+    const emailVal = contactForm.e.value.trim();
+    const msgVal = contactForm.m.value.trim();
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = dict.c_sending;
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/noeta.hs.cmr@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: nameVal,
+          email: emailVal,
+          message: msgVal,
+          _subject: dict.subj,
+          _replyto: emailVal,
+          _template: "table"
+        })
+      });
+
+      if (!response.ok) throw new Error("FormSubmit HTTP " + response.status);
+
+      submitBtn.textContent = dict.c_sent;
+      contactForm.reset();
+    } catch (err) {
+      submitBtn.textContent = dict.c_err;
+      const body = encodeURIComponent(msgVal + "\n\n" + nameVal + " <" + emailVal + ">");
+      window.location.href = "mailto:noeta.hs.cmr@gmail.com?subject=" + encodeURIComponent(dict.subj) + "&body=" + body;
+    } finally {
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = T[lang].c_b;
+      }, 3200);
+    }
   });
 }
 
@@ -1891,12 +2167,12 @@ applyTheme(theme);
 applyLang(lang);
 
 /* ==========================================================================
-   3. INTERACTIVE MINIMALISTIC EVOLVING NETWORK BACKGROUND (<canvas>)
-      - ~55-65 nodes desktop (~30 mobile), 2px-3.5px crisp matte circles
-      - Organic birth (with minimal 1px expanding circle) & random decay
-      - Pointer reactivity within ~190px (subtle attraction + accent lines)
-      - Smooth damped scroll parallax displacement
-      - Honors prefers-reduced-motion: reduce
+3. INTERACTIVE MINIMALISTIC EVOLVING NETWORK BACKGROUND (<canvas>)
+- ~55-65 nodes desktop (~30 mobile), 2px-3.5px crisp matte circles
+  - Organic birth (with minimal 1px expanding circle) & random decay
+  - Pointer reactivity within ~190px (subtle attraction + accent lines)
+  - Smooth damped scroll parallax displacement
+  - Honors prefers-reduced-motion: reduce
    ========================================================================== */
 (function initNetworkBackground() {
   const canvas = document.getElementById("net-bg");
