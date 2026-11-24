@@ -65,7 +65,7 @@
         "url": "https://noeta-lab.github.io/logo.png"
       },
       "image": "https://noeta-lab.github.io/logo.png",
-      "email": "hola@noeta.mx",
+      "email": "contacto@noeta.mx",
       "description": "Consultoría mexicana de estrategia, alianzas y operaciones para empresas de todos los tamaños, con reportes sectoriales por suscripción para PyMEs.",
       "slogan": "Estrategia de alto nivel, al alcance de tu empresa",
       "priceRange": "$$",
@@ -108,7 +108,7 @@
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer service",
-        "email": "hola@noeta.mx",
+        "email": "contacto@noeta.mx",
         "areaServed": "MX",
         "availableLanguage": ["Spanish", "English"]
       },
@@ -172,6 +172,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+
+<!-- MapLibre GL JS (Cartografía editorial minimalista) -->
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js" defer></script>
+
 <style>
 /* ==========================================================================
 1. DESIGN TOKENS — ABLETON.COM PROMOTIONAL EDITORIAL PALETTE
@@ -649,7 +654,7 @@ header {
 
 @media (min-width: 58rem) {
   .hero-grid {
-    grid-template-columns: 1.27fr 1fr; /* ~56% / 44% asymmetric split */
+    grid-template-columns: 1.27fr 1fr;
   }
 }
 
@@ -670,7 +675,6 @@ header {
   letter-spacing: -0.04em;
 }
 
-/* Bold solid matte black rectangular badge with Volt text (Live 13 poster echo) */
 .hero-badge {
   display: inline-block;
   margin-top: 1.6rem;
@@ -709,7 +713,6 @@ header {
   padding: 1.5rem 0 1.5rem 1.5rem;
 }
 
-/* Overlapping Vertical Ice Blue Stripe Field (Echoing Live 13 Poster Right Band) */
 .hero-art-stripes {
   position: absolute;
   top: 0;
@@ -726,7 +729,6 @@ header {
   z-index: 0;
 }
 
-/* Bold Flat Matte Volt Panel Overlapping the Stripe Field */
 .hero-art-panel {
   position: relative;
   z-index: 1;
@@ -799,7 +801,6 @@ header {
   position: relative;
 }
 
-/* Crisp 3px Matte Editorial Accent Top Bars */
 .pillar::before {
   content: "";
   position: absolute;
@@ -817,7 +818,6 @@ header {
   background: var(--cobalt);
 }
 
-/* Ensure crisp visibility of Volt bar on white light canvas */
 :root:not([data-theme="dark"]) .pillar--1::before {
   background: #c7ea3c;
 }
@@ -910,64 +910,76 @@ header {
   margin-right: clamp(0rem, 2.5vw, 2.25rem);
 }
 
-/* MAP: Mapa vectorial de México con divisiones políticas (32 entidades) y acento CDMX */
+/* MAP: Cartografía editorial minimalista (MapLibre + CartoDB No-Labels) */
 .report-map-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  color: var(--report-ink);
+  /* Fundido editorial: transparente detrás del texto izquierdo, visible hacia la derecha */
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.18) 38%, rgba(0, 0, 0, 0.85) 72%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.18) 38%, rgba(0, 0, 0, 0.85) 72%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  mask-composite: intersect;
 }
 
-.report-map-bg svg {
+#report-map-canvas {
   position: absolute;
-  right: clamp(0.75rem, 3.5vw, 3rem);
-  top: 50%;
-  transform: translateY(-50%);
-  width: min(82%, 47rem);
-  height: auto;
-  max-height: 94%;
-  opacity: 0.14;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.34;
+  mix-blend-mode: multiply;
+  filter: grayscale(100%) contrast(1.12);
+  transition: opacity 0.25s ease, filter 0.25s ease;
 }
 
-.report-map-bg .mx-states path {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+:root[data-theme="dark"] #report-map-canvas {
+  opacity: 0.28;
+  mix-blend-mode: screen;
+  filter: grayscale(100%) contrast(1.18);
 }
 
-.report-map-bg .mx-cdmx-fill {
-  fill: var(--cobalt);
-  stroke: var(--cobalt);
-  stroke-width: 1.4;
+/* Ocultar atribución y logo residuales de MapLibre para mantener estética limpia */
+.report-map-bg .maplibregl-ctrl-attrib,
+.report-map-bg .maplibregl-ctrl-logo {
+  display: none !important;
 }
 
-.report-map-bg .mx-hub {
-  fill: var(--cobalt);
+/* Nodo editorial minimalista en CDMX (cobalto en claro, volt en oscuro) */
+.mx-editorial-hub {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--cobalt);
+  pointer-events: none;
 }
 
-.report-map-bg .mx-hub-ring {
-  fill: none;
-  stroke: var(--cobalt);
-  stroke-width: 1.2;
-  transform-box: fill-box;
-  transform-origin: center;
+.mx-editorial-hub::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid var(--cobalt);
   animation: mx-pulse 4.5s ease-out infinite;
 }
 
 @keyframes mx-pulse {
-  0%   { transform: scale(1);   opacity: 0.95; }
-  75%  { transform: scale(2.8); opacity: 0; }
-  100% { transform: scale(2.8); opacity: 0; }
+  0%   { transform: scale(0.7); opacity: 0.9; }
+  75%  { transform: scale(2.4); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .report-map-bg .mx-hub-ring {
+  .mx-editorial-hub::after {
     animation: none;
-    opacity: 0.55;
+    opacity: 0.5;
   }
 }
 
@@ -1151,7 +1163,6 @@ header {
   position: relative;
 }
 
-/* Signature Ableton.com Floating Offset Lavender Block Leaving Open Canvas Margins */
 .why-lavender-plane {
   background: var(--lavender-block);
   color: var(--lavender-ink);
@@ -1298,7 +1309,7 @@ header {
 }
 
 .founders-title {
-  margin: 0 0 1.25rem;
+  margin: 0 0 0.85rem;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -1309,39 +1320,22 @@ header {
 .founders-names {
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
-  font-size: clamp(1.25rem, 2vw, 1.48rem);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.25;
+  gap: 0.4rem;
+  font-size: 0.98rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
 }
 
 .founder-link {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.35rem;
+  display: inline-block;
   text-decoration: none;
-  color: inherit;
-  transition: color 0.14s ease;
+  color: var(--muted);
+  transition: color 0.15s ease;
 }
 
 .founder-link:hover {
   color: var(--cobalt);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1.5px;
-}
-
-.founder-arrow {
-  font-size: 0.85em;
-  font-weight: 500;
-  opacity: 0.6;
-  transition: opacity 0.14s ease, transform 0.14s ease;
-}
-
-.founder-link:hover .founder-arrow {
-  opacity: 1;
-  transform: translate(2px, -2px);
 }
 
 /* Minimal, Uncluttered Editorial Form */
@@ -1492,7 +1486,6 @@ footer {
   <!-- ======================================================================
        HERO SECTION (#inicio) — ABLETON 12/13 PROMOTIONAL SPLIT
        ====================================================================== -->
-  <!-- SEO: aria-labelledby enlazado al <h1> principal -->
   <section class="hero" id="inicio" aria-labelledby="hero-heading">
     <div class="wrap">
       <div class="hero-grid">
@@ -1534,7 +1527,6 @@ footer {
   <!-- ======================================================================
        SERVICES SECTION (#servicios) — SPACIOUS 2-COLUMN SWISS EDITORIAL
        ====================================================================== -->
-  <!-- SEO: aria-labelledby enlazado al heading de sección y artículos con aria-labelledby -->
   <section class="services" id="servicios" aria-labelledby="services-heading">
     <div class="wrap">
       <div class="sec-head">
@@ -1573,87 +1565,15 @@ footer {
   <!-- ======================================================================
        NUESTRO REPORTE SECTORIAL (#reporte) — OVERLAPPING COLOR-BLOCK SPREAD
        ====================================================================== -->
-  <!-- SEO: aria-labelledby enlazado al heading de reporte -->
   <section class="report" id="reporte" aria-labelledby="report-heading">
     <div class="wrap">
       <div class="report-spread">
         <div class="report-volt-accent" aria-hidden="true"></div>
 
         <div class="report-plane">
-          <!-- MAP: Mapa de México con divisiones políticas estatales (32 entidades) y acento en CDMX -->
+          <!-- MAP: Cartografía editorial minimalista de México sin etiquetas ni controles -->
           <div class="report-map-bg" aria-hidden="true">
-            <svg viewBox="0 0 800 550" preserveAspectRatio="xMidYMid meet">
-              <g class="mx-states">
-                <!-- Baja California -->
-                <path d="M 30,28 L 76,32 L 94,104 L 68,104 L 46,66 Z"/>
-                <!-- Baja California Sur -->
-                <path d="M 68,104 L 94,104 L 128,176 L 116,188 L 96,154 Z"/>
-                <!-- Sonora -->
-                <path d="M 76,32 L 178,44 L 172,138 L 138,144 L 94,104 Z"/>
-                <!-- Chihuahua -->
-                <path d="M 178,44 L 274,64 L 270,164 L 194,164 L 172,138 Z"/>
-                <!-- Coahuila -->
-                <path d="M 274,64 L 348,82 L 352,184 L 288,184 L 270,164 Z"/>
-                <!-- Nuevo León -->
-                <path d="M 348,82 L 382,118 L 384,218 L 354,224 L 352,184 Z"/>
-                <!-- Tamaulipas -->
-                <path d="M 382,118 L 414,132 L 418,246 L 384,244 L 384,218 Z"/>
-                <!-- Sinaloa -->
-                <path d="M 138,144 L 172,138 L 194,164 L 216,228 L 192,236 Z"/>
-                <!-- Durango -->
-                <path d="M 194,164 L 270,164 L 288,184 L 274,246 L 216,228 Z"/>
-                <!-- Zacatecas -->
-                <path d="M 288,184 L 332,184 L 338,256 L 296,268 L 274,246 Z"/>
-                <!-- San Luis Potosí -->
-                <path d="M 332,184 L 354,224 L 384,244 L 378,284 L 338,274 L 338,256 Z"/>
-                <!-- Nayarit -->
-                <path d="M 192,236 L 216,228 L 246,254 L 238,284 L 216,282 Z"/>
-                <!-- Aguascalientes -->
-                <path d="M 294,254 L 312,254 L 312,272 L 294,272 Z"/>
-                <!-- Jalisco -->
-                <path d="M 216,282 L 238,284 L 246,254 L 294,254 L 294,272 L 306,294 L 274,322 L 232,318 Z"/>
-                <!-- Guanajuato -->
-                <path d="M 306,272 L 344,274 L 346,306 L 310,308 Z"/>
-                <!-- Querétaro -->
-                <path d="M 344,274 L 374,282 L 370,312 L 346,306 Z"/>
-                <!-- Hidalgo -->
-                <path d="M 374,282 L 408,292 L 404,326 L 370,322 L 370,312 Z"/>
-                <!-- Colima -->
-                <path d="M 244,318 L 266,320 L 262,334 L 246,332 Z"/>
-                <!-- Michoacán -->
-                <path d="M 266,320 L 306,294 L 310,308 L 344,312 L 340,356 L 282,354 Z"/>
-                <!-- Estado de México -->
-                <path d="M 344,312 L 370,322 L 392,334 L 384,362 L 342,356 Z"/>
-                <!-- Ciudad de México (CDMX) -->
-                <path class="mx-cdmx-fill" d="M 366,338 L 378,338 L 378,350 L 366,350 Z"/>
-                <!-- Morelos -->
-                <path d="M 362,352 L 384,352 L 384,368 L 362,368 Z"/>
-                <!-- Tlaxcala -->
-                <path d="M 392,332 L 412,332 L 412,346 L 392,346 Z"/>
-                <!-- Puebla -->
-                <path d="M 384,326 L 404,326 L 434,344 L 426,384 L 384,368 L 392,346 L 412,346 L 412,332 L 392,332 Z"/>
-                <!-- Guerrero -->
-                <path d="M 282,354 L 342,356 L 362,368 L 384,368 L 388,402 L 318,386 Z"/>
-                <!-- Veracruz -->
-                <path d="M 414,246 L 434,296 L 474,354 L 516,374 L 502,394 L 456,384 L 426,384 L 434,344 L 404,326 L 408,292 L 384,284 L 384,244 Z"/>
-                <!-- Oaxaca -->
-                <path d="M 384,368 L 426,384 L 456,384 L 484,412 L 444,432 L 388,402 Z"/>
-                <!-- Tabasco -->
-                <path d="M 502,394 L 516,374 L 574,376 L 568,402 L 518,402 Z"/>
-                <!-- Chiapas -->
-                <path d="M 484,412 L 518,402 L 568,402 L 582,444 L 538,464 L 496,434 Z"/>
-                <!-- Campeche -->
-                <path d="M 574,376 L 626,312 L 648,318 L 644,398 L 568,402 Z"/>
-                <!-- Yucatán -->
-                <path d="M 626,312 L 716,304 L 712,344 L 648,348 Z"/>
-                <!-- Quintana Roo -->
-                <path d="M 716,304 L 732,312 L 704,398 L 644,398 L 648,348 L 712,344 Z"/>
-              </g>
-
-              <!-- Punto de acento en Ciudad de México (cobalto en claro, volt en oscuro) -->
-              <circle class="mx-hub-ring" cx="372" cy="344" r="6"/>
-              <circle class="mx-hub" cx="372" cy="344" r="4"/>
-            </svg>
+            <div id="report-map-canvas"></div>
           </div>
 
           <div class="report-grid">
@@ -1715,7 +1635,6 @@ footer {
   <!-- ======================================================================
        WHY NOETÁ SECTION (#porque) — FLOATING LAVENDER EDITORIAL BACKDROP
        ====================================================================== -->
-  <!-- SEO: aria-labelledby enlazado al heading de sección -->
   <section class="why" id="porque" aria-labelledby="why-heading">
     <div class="wrap">
       <div class="why-stage">
@@ -1750,7 +1669,6 @@ footer {
   <!-- ======================================================================
        CONTACT & FOUNDING TEAM (#contacto) — OPEN ARCHITECTURAL SPLIT
        ====================================================================== -->
-  <!-- SEO: aria-labelledby y bloque semántico <address> con enlaces a los sitios de los fundadores -->
   <section class="contact" id="contacto" aria-labelledby="contact-heading">
     <div class="wrap">
       <div class="contact-grid">
@@ -1762,7 +1680,7 @@ footer {
 
           <div class="direct-row">
             <span class="direct-label" data-i18n="c_a">¿Prefieres escribirnos directo?</span>
-            <a class="direct-link" href="mailto:hola@noeta.mx">hola@noeta.mx ↗</a>
+            <a class="direct-link" id="direct-email-cta" href="#f">contacto@noeta.mx ↗</a>
           </div>
 
           <address class="founders">
@@ -1771,13 +1689,11 @@ footer {
               <span itemscope itemtype="https://schema.org/Person">
                 <a class="founder-link" href="https://rodrigo-h-c.github.io/index.html" target="_blank" rel="noopener noreferrer" itemprop="url">
                   <span itemprop="name">Rodrigo Hernández Cervantes</span>
-                  <span class="founder-arrow" aria-hidden="true">↗</span>
                 </a>
               </span>
               <span itemscope itemtype="https://schema.org/Person">
                 <a class="founder-link" href="https://postsocratico.com/" target="_blank" rel="noopener noreferrer" itemprop="url">
                   <span itemprop="name">Miguel Ángel Hernández Ruíz</span>
-                  <span class="founder-arrow" aria-hidden="true">↗</span>
                 </a>
               </span>
             </div>
@@ -1817,7 +1733,6 @@ footer {
         <span style="height: 11px;"></span>
         <span style="height: 15px;"></span>
       </span>
-      <!-- SEO: Uso semántico de <time> para el año -->
       <span>© <time datetime="2026">2026</time> Noetá. <span data-i18n="rights">Todos los derechos reservados.</span></span>
     </div>
     <a class="footer-top-link" href="#inicio" data-i18n="back_top">Volver arriba ↑</a>
@@ -1883,6 +1798,7 @@ const T = {
     plan_p4: "Sin plazos forzosos",
     rep_cta: "Suscribirme o pedir muestra →",
     rep_prefill: "Hola, me interesa suscribirme o solicitar una muestra de Nuestro reporte sectorial (Plan PyME). Mi empresa pertenece al sector: ",
+    info_prefill: "Hola, quiero recibir más información sobre ",
     w_eyebrow: "POR QUÉ NOETÁ",
     w_h: "La consultoría especializada no debería ser un privilegio de unos pocos",
     w_p: "Noetá existe para que cualquier empresa mexicana, de la más pequeña a la más grande, tenga acceso a pensamiento estratégico de calidad y pueda aprovechar las oportunidades reales de los mercados.",
@@ -1962,6 +1878,7 @@ const T = {
     plan_p4: "No long-term lock-in",
     rep_cta: "Subscribe or request a sample →",
     rep_prefill: "Hello, I would like to subscribe or request a sample of Our sector report (SME Plan). My company operates in the following sector: ",
+    info_prefill: "Hello, I would like to receive more information about ",
     w_eyebrow: "WHY NOETÁ",
     w_h: "Specialized consulting shouldn’t be a privilege of the few",
     w_p: "Noetá exists so that any Mexican company, from the smallest to the largest, can access quality strategic thinking and seize the real opportunities in the markets.",
@@ -1993,7 +1910,7 @@ const T = {
 2. LANGUAGE, THEME, MOBILE MENU, CTA PRE-FILL & SCROLL-SPY
    ========================================================================== */
 let lang = "es";
-let theme = "light"; // Default Light Theme (classic Ableton.com crisp white canvas)
+let theme = "light";
 
 try {
   const savedLang = localStorage.getItem("noeta-lang");
@@ -2041,7 +1958,6 @@ function applyLang(nextLang) {
     btn.setAttribute("aria-pressed", String(btn.dataset.lang === lang));
   });
 
-  // TITLE: Mantener document.title siempre como "Noetá" tanto en ES como en EN
   document.title = "Noetá";
 
   if (menuToggle && mobileMenu && mobileMenu.classList.contains("open")) {
@@ -2078,23 +1994,41 @@ if (menuToggle && mobileMenu) {
   });
 }
 
+/* Helper para rellenar el formulario con enfoque y resaltado */
+const msgField = document.getElementById("msg-field");
+function prefillContactMessage(text) {
+  if (!msgField) return;
+  msgField.value = text;
+  setTimeout(() => {
+    msgField.focus({ preventScroll: true });
+    msgField.setSelectionRange(msgField.value.length, msgField.value.length);
+    msgField.classList.add("prefill-highlight");
+    setTimeout(() => msgField.classList.remove("prefill-highlight"), 1200);
+  }, 320);
+}
+
 /* Report CTA Smooth Scroll + Bilingual Message Pre-fill */
 const repCta = document.getElementById("rep-cta");
-const msgField = document.getElementById("msg-field");
-
-if (repCta && msgField) {
+if (repCta) {
   repCta.addEventListener("click", () => {
-    msgField.value = T[lang].rep_prefill;
-    setTimeout(() => {
-      msgField.focus({ preventScroll: true });
-      msgField.classList.add("prefill-highlight");
-      setTimeout(() => msgField.classList.remove("prefill-highlight"), 1200);
-    }, 360);
+    prefillContactMessage(T[lang].rep_prefill);
   });
 }
 
-// FORM: Envío directo vía FormSubmit AJAX (https://formsubmit.co/ajax/noeta.hs.cmr@gmail.com)
-// con fallback automático a mailto:noeta.hs.cmr@gmail.com si hay error de red o modo offline.
+/* Direct Email CTA (contacto@noeta.mx) -> Rellena el formulario */
+const directEmailCta = document.getElementById("direct-email-cta");
+if (directEmailCta) {
+  directEmailCta.addEventListener("click", ev => {
+    ev.preventDefault();
+    const formEl = document.getElementById("f");
+    if (formEl) {
+      formEl.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    prefillContactMessage(T[lang].info_prefill);
+  });
+}
+
+// FORM: Envío directo vía FormSubmit AJAX con fallback automático a mailto:contacto@noeta.mx
 const contactForm = document.getElementById("f");
 const submitBtn = document.getElementById("submit-btn");
 if (contactForm && submitBtn) {
@@ -2134,7 +2068,7 @@ if (contactForm && submitBtn) {
     } catch (err) {
       submitBtn.textContent = dict.c_err;
       const body = encodeURIComponent(msgVal + "\n\n" + nameVal + " <" + emailVal + ">");
-      window.location.href = "mailto:noeta.hs.cmr@gmail.com?subject=" + encodeURIComponent(dict.subj) + "&body=" + body;
+      window.location.href = "mailto:contacto@noeta.mx?subject=" + encodeURIComponent(dict.subj) + "&body=" + body;
     } finally {
       setTimeout(() => {
         submitBtn.disabled = false;
@@ -2168,11 +2102,6 @@ applyLang(lang);
 
 /* ==========================================================================
 3. INTERACTIVE MINIMALISTIC EVOLVING NETWORK BACKGROUND (<canvas>)
-- ~55-65 nodes desktop (~30 mobile), 2px-3.5px crisp matte circles
-  - Organic birth (with minimal 1px expanding circle) & random decay
-  - Pointer reactivity within ~190px (subtle attraction + accent lines)
-  - Smooth damped scroll parallax displacement
-  - Honors prefers-reduced-motion: reduce
    ========================================================================== */
 (function initNetworkBackground() {
   const canvas = document.getElementById("net-bg");
@@ -2230,7 +2159,7 @@ applyLang(lang);
       y: Math.random() * height,
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
-      r: 2.0 + Math.random() * 1.5, // 2px - 3.5px
+      r: 2.0 + Math.random() * 1.5,
       depth: 0.65 + Math.random() * 0.85,
       weight: Math.random(),
       alpha: initial ? 0.65 + Math.random() * 0.35 : 0,
@@ -2299,7 +2228,6 @@ applyLang(lang);
     scrollVel *= 0.91;
     if (Math.abs(scrollVel) < 0.003) scrollVel = 0;
 
-    // Random organic node creation & deletion
     spawnAccum += dt;
     if (spawnAccum > 1600) {
       spawnAccum = 0;
@@ -2338,7 +2266,6 @@ applyLang(lang);
         }
       }
 
-      // Subtle pointer attraction/displacement within ~190px
       if (pointer.strength > 0.01) {
         const dx = pointer.x - n.x;
         const dy = pointer.y - n.y;
@@ -2365,7 +2292,6 @@ applyLang(lang);
         n.vy *= 0.965;
       }
 
-      // Drift + smooth damped scroll parallax
       n.x += n.vx * (dt * 0.055) + scrollVel * (n.depth - 1.0) * 0.14;
       n.y += n.vy * (dt * 0.055) - scrollVel * n.depth;
 
@@ -2379,7 +2305,6 @@ applyLang(lang);
     const byId = new Map();
     for (let i = 0; i < nodes.length; i++) byId.set(nodes[i].id, nodes[i]);
 
-    // Organic edge creation
     for (let i = 0; i < nodes.length; i++) {
       const a = nodes[i];
       if (a.state === "out") continue;
@@ -2404,7 +2329,6 @@ applyLang(lang);
       }
     }
 
-    // Organic edge decay
     edges.forEach((edge, key) => {
       const a = byId.get(edge.idA);
       const b = byId.get(edge.idB);
@@ -2434,7 +2358,6 @@ applyLang(lang);
     const byId = new Map();
     for (let i = 0; i < nodes.length; i++) byId.set(nodes[i].id, nodes[i]);
 
-    // 1. Crisp 1px Matte Ink Edges (Restrained Non-Distracting Opacity)
     const maxEdgeOp = colors.isDark ? 0.24 : 0.2;
     ctx.lineWidth = 1;
 
@@ -2454,7 +2377,6 @@ applyLang(lang);
       ctx.stroke();
     });
 
-    // 2. Crisp 1px Pointer Accent Lines (Cobalt in Light Mode, Volt in Dark Mode)
     if (pointer.strength > 0.01) {
       const maxPtrOp = colors.isDark ? 0.42 : 0.36;
       ctx.lineWidth = 1;
@@ -2475,7 +2397,6 @@ applyLang(lang);
       }
     }
 
-    // 3. Minimal Matte Nodes (0.24 - 0.38 Opacity) + 1px Expanding Spawn Circle
     const baseOp = colors.isDark ? 0.26 : 0.24;
     const spanOp = 0.14;
 
@@ -2546,6 +2467,85 @@ applyLang(lang);
       requestAnimationFrame(loop);
     }
   });
+})();
+
+/* ==========================================================================
+4. MINIMALIST EDITORIAL MAP BACKGROUND (MapLibre GL + CartoDB No-Labels)
+   ========================================================================== */
+(function initEditorialReportMap() {
+  const container = document.getElementById("report-map-canvas");
+  if (!container) return;
+
+  const STYLES = {
+    light: {
+      version: 8,
+      sources: {
+        carto: {
+          type: "raster",
+          tiles: ["https://basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png"],
+          tileSize: 256
+        }
+      },
+      layers: [{ id: "carto-layer", type: "raster", source: "carto" }]
+    },
+    dark: {
+      version: 8,
+      sources: {
+        carto: {
+          type: "raster",
+          tiles: ["https://basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}@2x.png"],
+          tileSize: 256
+        }
+      },
+      layers: [{ id: "carto-layer", type: "raster", source: "carto" }]
+    }
+  };
+
+  let mapInstance = null;
+
+  function mountMap() {
+    if (mapInstance || typeof maplibregl === "undefined") return;
+
+    const currentTheme = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+
+    mapInstance = new maplibregl.Map({
+      container: "report-map-canvas",
+      style: STYLES[currentTheme],
+      center: [-103.5, 23.2],
+      zoom: 4.35,
+      interactive: false,
+      attributionControl: false
+    });
+
+    const hubEl = document.createElement("div");
+    hubEl.className = "mx-editorial-hub";
+    new maplibregl.Marker({ element: hubEl })
+      .setLngLat([-99.1332, 19.4326])
+      .addTo(mapInstance);
+
+    new MutationObserver(() => {
+      const nextTheme = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+      if (mapInstance) {
+        mapInstance.setStyle(STYLES[nextTheme]);
+      }
+    }).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"]
+    });
+  }
+
+  const reportSection = document.getElementById("reporte");
+  if ("IntersectionObserver" in window && reportSection) {
+    const mapObserver = new IntersectionObserver((entries, obs) => {
+      if (entries.some(e => e.isIntersecting)) {
+        mountMap();
+        obs.disconnect();
+      }
+    }, { rootMargin: "300px 0px" });
+    mapObserver.observe(reportSection);
+  } else {
+    window.addEventListener("load", mountMap);
+  }
 })();
 </script>
 </body>
