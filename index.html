@@ -1604,7 +1604,7 @@ footer {
                 </div>
               </div>
 
-              <!-- Static Typographic Example Sectors Covered -->
+              <!-- Static Typographic Line of Example Sectors Covered -->
               <div class="sectors-line">
                 <span class="sectors-label" data-i18n="rep_sectors_label">Sectores cubiertos:</span>
                 <span class="sectors-list" data-i18n="rep_sectors_list">Manufactura · Comercio · Servicios · Agroindustria · Logística</span>
@@ -2476,13 +2476,15 @@ applyLang(lang);
   const container = document.getElementById("report-map-canvas");
   if (!container) return;
 
+  const CARTO_KEY = "cb1_5eu5_1_4242c8baf6785ec870902920";
+
   const STYLES = {
     light: {
       version: 8,
       sources: {
         carto: {
           type: "raster",
-          tiles: ["https://basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png"],
+          tiles: [`https://basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png?key=${CARTO_KEY}`],
           tileSize: 256
         }
       },
@@ -2493,7 +2495,7 @@ applyLang(lang);
       sources: {
         carto: {
           type: "raster",
-          tiles: ["https://basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}@2x.png"],
+          tiles: [`https://basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}@2x.png?key=${CARTO_KEY}`],
           tileSize: 256
         }
       },
