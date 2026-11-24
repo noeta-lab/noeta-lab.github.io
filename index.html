@@ -919,16 +919,15 @@ header {
   margin-right: clamp(0rem, 2.5vw, 2.25rem);
 }
 
-/* MAP: Cartografía vectorial GeoJSON tenue + cadenas de producción interactivas al hover */
+/* MAP: Cartografía vectorial GeoJSON amplia y tenue como marca de agua */
 .report-map-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  /* Suaviza el extremo izquierdo bajo la tipografía para que el mapa acompañe sin competir con el texto */
-  -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.65) 34%, rgba(0, 0, 0, 0.96) 58%, rgba(0, 0, 0, 0.85) 100%);
-  mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.65) 34%, rgba(0, 0, 0, 0.96) 58%, rgba(0, 0, 0, 0.85) 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
 }
 
 #report-map-canvas {
@@ -1532,7 +1531,7 @@ footer {
         <div class="report-volt-accent" aria-hidden="true"></div>
 
         <div class="report-plane" id="report-plane">
-          <!-- MAP: Cartografía vectorial GeoJSON tenue + cadenas de producción interactivas -->
+          <!-- MAP: Cartografía vectorial GeoJSON amplia y tenue + cadenas de producción interactivas -->
           <div class="report-map-bg" aria-hidden="true">
             <div id="report-map-canvas"></div>
           </div>
@@ -2554,9 +2553,10 @@ applyLang(lang);
   }
 
   function buildVectorStyle(isDark) {
-    const accent = isDark ? "#e2ff70" : "#0038ff";
-    const baseFill = isDark ? "#bce7fa" : "#0038ff";
-    const baseLine = isDark ? "#bce7fa" : "#0f1012";
+    // Paleta tonal pastel / monocromática tenue que no compite con el texto
+    const accent = isDark ? "#9ecbe0" : "#2c5e7a";
+    const baseFill = isDark ? "#bce7fa" : "#ffffff";
+    const baseLine = isDark ? "#8fb8cc" : "#4a7085";
 
     return {
       version: 8,
@@ -2581,7 +2581,7 @@ applyLang(lang);
           source: "mexico",
           paint: {
             "fill-color": baseFill,
-            "fill-opacity": isDark ? 0.065 : 0.055
+            "fill-opacity": isDark ? 0.04 : 0.22
           }
         },
         {
@@ -2590,8 +2590,8 @@ applyLang(lang);
           source: "mexico",
           filter: ["in", ["get", "name"], ["literal", []]],
           paint: {
-            "fill-color": accent,
-            "fill-opacity": isDark ? 0.14 : 0.11
+            "fill-color": isDark ? "#bce7fa" : "#ffffff",
+            "fill-opacity": isDark ? 0.08 : 0.42
           }
         },
         {
@@ -2600,8 +2600,8 @@ applyLang(lang);
           source: "mexico",
           paint: {
             "line-color": baseLine,
-            "line-width": 0.9,
-            "line-opacity": isDark ? 0.17 : 0.14
+            "line-width": 0.85,
+            "line-opacity": isDark ? 0.14 : 0.16
           }
         },
         {
@@ -2614,9 +2614,9 @@ applyLang(lang);
           },
           paint: {
             "line-color": accent,
-            "line-width": ["case", ["boolean", ["get", "secondary"], false], 1, 1.4],
+            "line-width": ["case", ["boolean", ["get", "secondary"], false], 0.9, 1.25],
             "line-dasharray": [2, 2],
-            "line-opacity": ["case", ["boolean", ["get", "secondary"], false], 0.32, 0.58]
+            "line-opacity": ["case", ["boolean", ["get", "secondary"], false], 0.2, 0.36]
           }
         },
         {
@@ -2626,16 +2626,16 @@ applyLang(lang);
           paint: {
             "circle-radius": [
               "match", ["get", "role"],
-              "origin", 9,
-              "peer", 6.5,
-              4.5
+              "origin", 8,
+              "peer", 6,
+              4
             ],
             "circle-color": accent,
             "circle-opacity": [
               "match", ["get", "role"],
-              "origin", 0.24,
-              "peer", 0.16,
-              0.1
+              "origin", 0.14,
+              "peer", 0.09,
+              0.05
             ]
           }
         },
@@ -2646,16 +2646,16 @@ applyLang(lang);
           paint: {
             "circle-radius": [
               "match", ["get", "role"],
-              "origin", 4,
-              "peer", 2.8,
-              2
+              "origin", 3.5,
+              "peer", 2.5,
+              1.8
             ],
             "circle-color": accent,
             "circle-opacity": [
               "match", ["get", "role"],
-              "origin", 0.88,
-              "peer", 0.72,
-              0.48
+              "origin", 0.48,
+              "peer", 0.36,
+              0.24
             ]
           }
         }
@@ -2673,8 +2673,8 @@ applyLang(lang);
     const isDesktop = w >= 860;
     map.fitBounds(MEXICO_BOUNDS, {
       padding: isDesktop
-        ? { top: 24, bottom: 24, left: 160, right: 260 }
-        : { top: 20, bottom: 180, left: 16, right: 16 },
+        ? { top: 12, bottom: 12, left: 24, right: 165 }
+        : { top: 10, bottom: 10, left: 10, right: 10 },
       animate: false
     });
   }
@@ -2758,7 +2758,7 @@ applyLang(lang);
       container: "report-map-canvas",
       style: buildVectorStyle(isDark),
       bounds: MEXICO_BOUNDS,
-      fitBoundsOptions: { padding: 32 },
+      fitBoundsOptions: { padding: 12 },
       interactive: false,
       attributionControl: false
     });
